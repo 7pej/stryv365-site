@@ -1,0 +1,396 @@
+/* STRYV365
+   Base stylesheet. Shared across all pages. */
+
+/* ---------- tokens ---------- */
+
+:root{
+  --red:#ED1C24;
+  --red-dark:#C4161C;
+  --black:#231F20;
+  --warm-gray:#76706E;
+  --light-gray:#F1F1F2;
+  --white:#FFFFFF;
+
+  /* Futura PT via Adobe Fonts. Falls back to the Century Gothic /
+     Arial Narrow pair, then to webfonts for anyone missing both. */
+  --display:"futura-pt","Century Gothic","Jost",sans-serif;
+  --text:"futura-pt-condensed","Arial Narrow","Archivo Narrow",sans-serif;
+
+  --wrap:1280px;
+  --gutter:28px;
+}
+
+/* ---------- base ---------- */
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body{
+  font-family:var(--text);
+  font-weight:500;
+  font-size:17.5px;
+  line-height:1.6;
+  letter-spacing:.005em;
+  color:var(--black);
+  background:var(--white);
+  -webkit-font-smoothing:antialiased;
+}
+
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
+
+h1,h2,h3,h4,h5{
+  font-family:var(--display);
+  font-weight:700;
+  letter-spacing:-.015em;
+  line-height:1.04;
+  text-transform:uppercase;
+}
+
+/* peak team is lowercase and STRYVtime is mixed case per brand.
+   Anything carrying .exact must never be transformed. */
+.exact{text-transform:none !important}
+
+/* ---------- image slots ----------
+   Temporary. Replace each .ph with an <img>. Filenames in the
+   boxes match what belongs in /images. */
+
+.ph{
+  position:relative;
+  background-image:repeating-linear-gradient(45deg,#E6E6E8 0 14px,#F1F1F2 14px 28px);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--warm-gray);
+  font-family:var(--text);font-size:12px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;text-align:center;
+  padding:20px;
+}
+.ph.on-black{background-image:repeating-linear-gradient(45deg,#2E2A2B 0 14px,#231F20 14px 28px);color:#6E6869}
+.ph span{max-width:300px;line-height:1.6}
+
+/* ---------- buttons ---------- */
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:14px;letter-spacing:.06em;
+  padding:14px 26px;border:2px solid transparent;
+  transition:all .18s ease;white-space:nowrap;
+}
+.btn-red{background:var(--red);color:var(--white)}
+.btn-red:hover{background:var(--red-dark)}
+.btn-line{border-color:var(--black);color:var(--black)}
+.btn-line:hover{background:var(--black);color:var(--white)}
+.btn-line-w{border-color:rgba(255,255,255,.65);color:var(--white)}
+.btn-line-w:hover{background:var(--white);color:var(--black)}
+.btn-white{background:var(--white);color:var(--red)}
+.btn-white:hover{background:var(--light-gray)}
+.btn-lg{padding:17px 34px;font-size:15.5px}
+
+/* ---------- utility bar ---------- */
+
+.utility{background:var(--black);color:#C4C0BF;font-size:14px}
+.utility .wrap{display:flex;justify-content:space-between;align-items:center;height:44px;gap:20px}
+.utility-left{display:flex;gap:24px;align-items:center;font-weight:700}
+.utility-left a:hover{color:var(--white)}
+.utility-right{display:flex;gap:14px;align-items:center}
+
+.uicon{display:flex;align-items:center;justify-content:center;width:26px;height:26px;color:#C4C0BF;transition:color .18s}
+.uicon:hover{color:var(--red)}
+.uicon svg{width:19px;height:19px;fill:currentColor}
+
+/* ---------- header ---------- */
+
+.header{position:sticky;top:0;z-index:60;background:var(--white);transition:box-shadow .22s ease}
+.header.scrolled{box-shadow:0 2px 18px rgba(35,31,32,.13)}
+.header .wrap{display:flex;align-items:center;gap:36px;height:96px}
+
+.logo{flex-shrink:0;display:block}
+.logo img{height:52px;width:auto}
+.logo-slot{
+  width:250px;height:56px;background:var(--light-gray);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--text);font-size:11px;font-weight:600;
+  letter-spacing:.16em;color:var(--warm-gray);text-transform:uppercase;
+}
+
+.nav{display:flex;gap:32px;margin-left:auto;align-items:center}
+.nav>a{
+  font-family:var(--display);font-weight:700;font-size:15px;
+  letter-spacing:.05em;text-transform:uppercase;
+  padding:36px 0;position:relative;white-space:nowrap;
+}
+.nav>a::after{
+  content:'';position:absolute;left:0;right:0;bottom:0;height:5px;
+  background:var(--red);transform:scaleY(0);transform-origin:bottom;
+  transition:transform .18s;
+}
+.nav>a:hover::after{transform:scaleY(1)}
+.nav>a.current::after{transform:scaleY(1)}
+
+.header-cta{display:flex;gap:10px;flex-shrink:0}
+
+/* ---------- banner ---------- */
+
+.banner{
+  position:relative;background:var(--black);overflow:hidden;
+  max-width:var(--wrap);margin:0 auto;
+  aspect-ratio:20/9;
+}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .7s ease}
+.slide.active{opacity:1}
+.slide .ph{height:100%}
+.slide img{width:100%;height:100%;object-fit:cover}
+
+.banner-nav{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 18px;pointer-events:none}
+.arrow{
+  pointer-events:auto;width:54px;height:54px;
+  background:rgba(35,31,32,.55);color:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;transition:background .18s;
+}
+.arrow:hover{background:var(--red)}
+
+.dots{position:absolute;bottom:20px;left:0;right:0;display:flex;gap:10px;justify-content:center}
+.dot{width:34px;height:5px;background:rgba(255,255,255,.45);transition:background .18s}
+.dot.active{background:var(--red)}
+
+/* ---------- intro ---------- */
+
+.intro{padding:74px 0 70px}
+.intro .wrap{display:grid;grid-template-columns:1.25fr .75fr;gap:64px;align-items:end}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:var(--display);font-weight:700;font-size:14px;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--warm-gray);margin-bottom:22px;
+}
+.eyebrow::before{content:'';width:40px;height:4px;background:var(--red)}
+
+.intro h1{font-size:clamp(42px,6vw,84px);line-height:.94}
+.intro h1 em{font-style:normal;color:var(--red)}
+.intro-side p{font-size:19px;color:var(--warm-gray);margin-bottom:26px}
+.intro-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ---------- stat bar ---------- */
+
+.statbar{background:var(--red)}
+.statbar .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:36px 30px;color:var(--white);border-left:2px solid rgba(255,255,255,.3)}
+.stat:first-child{border-left:none;padding-left:0}
+.stat b{display:block;font-family:var(--display);font-weight:700;font-size:50px;line-height:1;letter-spacing:-.04em}
+.stat span{display:block;font-size:14px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;margin-top:10px;color:rgba(255,255,255,.92)}
+
+/* ---------- section furniture ---------- */
+
+section{padding:100px 0}
+.hairline{height:2px;background:var(--light-gray);max-width:var(--wrap);margin:0 auto}
+
+.sec-head{max-width:760px;margin-bottom:52px}
+.sec-label{
+  display:block;font-family:var(--display);font-weight:700;font-size:14px;
+  letter-spacing:.17em;text-transform:uppercase;color:var(--red);margin-bottom:16px;
+}
+.sec-head h2{font-size:clamp(36px,4.6vw,60px)}
+.sec-head p{margin-top:20px;font-size:19px;color:var(--warm-gray)}
+
+.head-row{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:50px}
+.head-row .sec-head{margin-bottom:0}
+
+/* ---------- mission ---------- */
+
+.mission .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:68px;align-items:center}
+.mission .big{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(27px,3.3vw,42px);line-height:1.07;
+  text-transform:uppercase;margin-bottom:24px;
+}
+.mission .big em{font-style:normal;color:var(--red)}
+.mission p{font-size:17.5px;color:#413C3D;margin-bottom:16px}
+.mission .ph,
+.mission img{aspect-ratio:4/5;object-fit:cover;width:100%}
+
+/* ---------- programs ---------- */
+
+.prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.prog{display:flex;flex-direction:column;transition:transform .2s ease}
+.prog:hover{transform:translateY(-6px)}
+.prog .ph,
+.prog img{aspect-ratio:4/3;object-fit:cover;width:100%;margin-bottom:22px}
+.prog-tag{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--warm-gray);margin-bottom:10px}
+.prog h3{font-size:30px;margin-bottom:12px;color:var(--black)}
+.prog p{font-size:16.5px;color:var(--warm-gray);flex:1;margin-bottom:20px}
+.prog-link{
+  font-family:var(--display);font-weight:700;font-size:14px;
+  letter-spacing:.06em;text-transform:uppercase;
+  display:inline-flex;gap:9px;align-items:center;color:var(--red);
+}
+.prog-link::after{content:'→';transition:transform .18s}
+.prog:hover .prog-link::after{transform:translateX(6px)}
+
+/* ---------- success stories ---------- */
+
+.stories{background:var(--black);color:var(--white);padding:78px 0}
+.stories .sec-label{color:var(--red)}
+.stories .sec-head{margin-bottom:34px}
+
+.story-row{display:flex;align-items:center;gap:20px}
+.story-stage{flex:1;min-width:0}
+.story-slide{display:none;grid-template-columns:.62fr 1.38fr;gap:40px;align-items:center}
+.story-slide.active{display:grid;animation:fade .5s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+.story-slide .ph{aspect-ratio:4/3}
+/* Quotes stay in sentence case. These run long and in the brand's
+   all-caps heading style they read as shouting, which is wrong for a
+   kid's voice. Add text-transform:uppercase here to go back. */
+.story-slide blockquote{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(20px,2.3vw,30px);line-height:1.22;
+  margin-bottom:18px;
+}
+.story-slide blockquote::before{content:'“';color:var(--red);font-size:1.1em;line-height:0;vertical-align:-.1em;margin-right:5px}
+.story-slide blockquote::after{content:'”';color:var(--red);font-size:1.1em;line-height:0;vertical-align:-.1em;margin-left:2px}
+.story-slide cite{font-style:normal;font-size:14.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#A8A3A1;display:block}
+
+.story-arrow{
+  flex:0 0 auto;width:50px;height:50px;
+  border:2px solid rgba(255,255,255,.4);color:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  font-size:19px;transition:all .18s;
+}
+.story-arrow:hover{background:var(--red);border-color:var(--red)}
+.stories-foot{margin-top:34px;padding-left:70px}
+
+/* ---------- news and events ---------- */
+
+.news-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
+
+.event{display:grid;grid-template-columns:104px 1fr;gap:26px;align-items:center;padding:24px 0;border-top:2px solid var(--light-gray)}
+.event:last-of-type{border-bottom:2px solid var(--light-gray)}
+.event-date{text-align:center;border-right:2px solid var(--light-gray);padding-right:26px}
+.event-date b{display:block;font-family:var(--display);font-weight:700;font-size:36px;line-height:1;letter-spacing:-.04em}
+.event-date span{display:block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-top:5px}
+.event h4{font-size:22px;margin-bottom:5px}
+.event p{font-size:16px;color:var(--warm-gray);margin-bottom:12px}
+.event-link{font-family:var(--display);font-weight:700;font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--red)}
+.news-actions{margin-top:48px;text-align:center}
+
+.feed-label{
+  font-family:var(--display);font-weight:700;font-size:14px;
+  letter-spacing:.17em;text-transform:uppercase;color:var(--red);
+  margin-bottom:16px;display:block;
+}
+.feed{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--light-gray)}
+
+/* Each photo waits below the frame, slides up into view, then keeps
+   going up and out when the next one arrives. */
+.feed-item{
+  position:absolute;inset:0;
+  transform:translateY(100%);
+  transition:transform .85s cubic-bezier(.66,0,.34,1);
+}
+.feed-item.active{transform:translateY(0)}
+.feed-item.leaving{transform:translateY(-100%)}
+.feed-item .ph,
+.feed-item img{width:100%;height:100%;object-fit:cover}
+
+@media(prefers-reduced-motion:reduce){
+  .feed-item{transition:none}
+}
+
+/* ---------- partners ---------- */
+
+.marquee{
+  position:relative;margin-top:44px;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+}
+/* Track holds the logo set twice so the loop has no seam. */
+.marquee-track{display:flex;gap:18px;width:max-content;animation:slide 44s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.plogo{
+  flex:0 0 190px;height:118px;background:var(--light-gray);
+  border-bottom:5px solid transparent;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .18s;
+}
+.plogo:hover{border-bottom-color:var(--red);background:var(--white)}
+
+/* Each logo is pre-centred on a 380x236 transparent canvas and scaled
+   so every mark carries about the same visual weight, which is the only
+   way a row of mixed square and very wide logos reads evenly. Replacing
+   one means running it through the same treatment. */
+.plogo img{width:100%;height:100%;object-fit:contain}
+
+@media(prefers-reduced-motion:reduce){.marquee-track{animation:none}}
+
+/* ---------- donate ---------- */
+
+.donate{background:var(--red);color:var(--white);text-align:center}
+.donate h2{font-size:clamp(40px,6vw,82px);color:var(--white);margin-bottom:20px;line-height:.96}
+.donate p{font-size:20px;max-width:640px;margin:0 auto 36px;color:rgba(255,255,255,.94)}
+.donate-actions{display:flex;gap:13px;justify-content:center;flex-wrap:wrap}
+
+/* ---------- footer ---------- */
+
+.footer{background:var(--black);color:#A8A3A1;padding:74px 0 0;font-size:16px}
+.footer-grid{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:48px;padding-bottom:56px}
+.footer h5{color:var(--white);font-size:14px;letter-spacing:.16em;margin-bottom:20px}
+.footer ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.footer a:hover{color:var(--white)}
+.footer .logo-slot{background:#332F30;color:#7E7877}
+.footer-about p{margin:20px 0;max-width:330px;line-height:1.7}
+
+.socials{display:flex;gap:10px;margin-top:22px}
+.social{
+  width:42px;height:42px;border:2px solid rgba(255,255,255,.25);
+  display:flex;align-items:center;justify-content:center;
+  color:#C8C4C3;transition:all .18s;
+}
+.social svg{width:19px;height:19px;fill:currentColor}
+.social:hover{background:var(--red);border-color:var(--red);color:var(--white)}
+
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.14);padding:26px 0;
+  display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:14.5px;
+}
+
+/* ---------- tablet ---------- */
+
+@media(max-width:1040px){
+  .nav{display:none}
+  .intro .wrap{grid-template-columns:1fr;gap:34px;align-items:start}
+  .statbar .wrap{grid-template-columns:1fr 1fr}
+  .stat{border-left:none;padding-left:0;border-top:2px solid rgba(255,255,255,.3)}
+  .stat:nth-child(-n+2){border-top:none}
+  .mission .wrap{grid-template-columns:1fr;gap:40px}
+  .prog-grid{grid-template-columns:1fr}
+  .story-row{flex-wrap:wrap}
+  .story-stage{flex:1 0 100%;order:-1}
+  .story-slide.active{grid-template-columns:1fr;gap:26px}
+  .stories-foot{padding-left:0}
+  .news-grid{grid-template-columns:1fr;gap:44px}
+  .feed{height:420px}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+
+/* ---------- phone ---------- */
+
+@media(max-width:620px){
+  section{padding:66px 0}
+  .utility-left{gap:16px}
+  .header .wrap{height:76px}
+  .nav>a{padding:0}
+  .logo-slot{width:180px;height:44px}
+  .logo img{height:40px}
+  .arrow{width:44px;height:44px}
+  .event{grid-template-columns:84px 1fr;gap:18px}
+  .event-date{padding-right:18px}
+  .footer-grid{grid-template-columns:1fr}
+}

@@ -1,0 +1,25 @@
+# Source originals. Full-resolution exports the web versions were made
+# from. The site never loads these, and they would add roughly 82 MB to
+# the repo. Keep them on the drive, out of version control.
+
+# Video frame grabs used for the testimonial portraits
+images/Mikel.png
+images/Braylon.png
+images/Simone.png
+
+# Camera exports used for the program cards
+images/peak-time.jpg
+images/ris.jpg
+images/stryvtime.jpg
+
+# Camera exports used for the photo feed
+images/events/2026-*.jpg
+
+# Partner logos before the resizing pass. Every original has spaces in
+# its filename; the processed versions never do.
+images/partners/* *.png
+
+# OS clutter
+Thumbs.db
+desktop.ini
+.DS_Store
